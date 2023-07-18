@@ -1,2 +1,6 @@
-@import "header";
-@import "footer";
+@use './body';
+@use './header';
+@use './sidebar';
+@use './content';
+@use './task';
+@use './footer';

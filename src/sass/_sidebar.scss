@@ -1,0 +1,44 @@
+@use './styles' as *;
+
+.sidebar {
+    background-color: $secondary-color;
+    width: 200px;
+    height: 100vh;
+    float: left;
+    margin: 5px;
+    border-radius: 10px;
+    color: $font-color;
+    @include flex(column, space-between, center);
+    overflow: hidden;
+    
+    .todo_nav {
+        @include flex(column, center, flex-start);
+        font-weight: bolder;
+        margin-top: 30%;
+        gap: 8px;
+
+        a {
+            cursor: pointer;
+
+            &:active {
+                border-bottom: 2px solid red;
+            }
+        }
+    }
+
+    .bg_text {
+        color: #3904AB;
+        font-family: $secondary-font;
+        transform: rotate(-90deg);
+        font-size: 130px;
+        overflow: hidden;
+        // width: 450px;
+        height: 20vw;
+        // background-color: white;
+        @include flex(column, flex-start, center);
+        span {
+            margin-top: 37px;
+            margin-left: 120px;
+        }
+    }
+}

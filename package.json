@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p watch serve node-sass",
+    "start": "npm-run-all -p watch serve sass",
     "watch": "webpack --watch",
     "serve": "webpack serve --open",
     "build": "webpack --progress",
-    "node-sass": "sass --watch src/sass/main.scss dist/style.css"
+    "sass": "sass --watch src/sass/main.scss dist/style.css"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "mini-css-extract-plugin": "^2.7.6",
     "node-sass": "^9.0.0",
     "npm-run-all": "^4.1.5",
+    "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.1",

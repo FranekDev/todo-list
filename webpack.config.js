@@ -11,7 +11,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-        include: path.resolve(__dirname, 'src', 'sass'),
+        include: path.resolve(__dirname, 'src', 'sass', 'main.scss'),
       },
     ],
   },
@@ -23,9 +23,11 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'style.css',
+      insert: 'head',
     }),
     new HtmlWebpackPlugin({
       title: 'Todo List',
+      chunks: ['main'],
     }),
   ],
   output: {

@@ -1,0 +1,50 @@
+@use './styles' as *;
+
+.task {
+    width: 400px;
+    @include flex(row, space-between, center);
+    padding: 10px;
+    border: 3px solid $third-color;
+    border-radius: 22px;
+    height: 70px;
+    width: 800px;
+    font-size: $font-size;
+
+    .info {
+        @include flex(row, space-between, center);
+        gap: 10px;
+
+        input[type="checkbox"] {
+            appearance: none;
+            background-color: $main-color;
+            margin: 0;
+            font: inherit;
+            color: $third-color;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid $third-color;
+            border-radius: 0.15em;
+            transform: translate(-0.075em);
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+
+            &::before {
+                content: "";
+                width: 0.6em;
+                height: 0.6em;
+                transform: scale(0);
+                transition: 120ms transform ease-in-out;
+                box-shadow: inset 1em 1em $third-color;
+                border-radius: 0.1em;
+            }
+
+            &:checked::before {
+                transform: scale(1);
+            }
+        }
+    }
+    @media (max-width: $layout-breakpoint-small) {
+        width: 500px;
+    }
+}

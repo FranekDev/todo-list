@@ -1,0 +1,10 @@
+@use './styles' as *;
+
+footer {
+    color: $font-color;
+
+    a {
+        text-decoration: none;
+        color: $third-color;
+    }
+}

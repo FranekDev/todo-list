@@ -1,7 +1,15 @@
-@import "variables";
+@use './styles' as *;
 
-h1 {
-    color: orange;
-    width: 100%;
-    background-color: $bg-color;
+header {
+    float: right;
+    width: 80vw;
+    font-family: $secondary-font;
+
+    p {
+        color: #000000;
+        height: 100px;
+        @include flex(column, center, center);
+        font-size: 130px;
+        margin: 0 auto;
+    }
 }

@@ -1,10 +1,13 @@
 const Header = () => {
     const body = document.querySelector('body');
     const header = document.createElement('header');
-    const h1 = document.createElement('h1');
-    h1.textContent = 'Todo List';
-    header.appendChild(h1);
-    body.appendChild(header);
+    const content = document.createElement('div');
+    content.classList.add('content');
+    const p = document.createElement('p');
+    p.textContent = 'Todo List';
+    header.appendChild(p);
+    content.appendChild(header);
+    body.appendChild(content);
 }
 
 export default Header;
