@@ -6,8 +6,14 @@ const Tasks = () => {
     const main = document.createElement('main');
     content.appendChild(main);
 
-    let tasks = [new Task('Testowy task')];
+    let taskId = 1;
+
+    let tasks = [ 
+        { id: taskId++, param: new Task('Testowy task', '18/07/2023') }, 
+        { id: taskId++, param: new Task('Testowy task 2', '19/07/2023') }
+    ];
     const tasksContent = document.createElement('div');
+    tasksContent.classList.add('tasks_list');
     main.appendChild(tasksContent);
 
     const addTaskBtn = document.createElement('a');
@@ -23,27 +29,36 @@ const Tasks = () => {
     addBtn.textContent = 'Add';
     const name = document.createElement('input');
     name.type = 'text';
+    name.placeholder = 'Task name';
 
     const date = document.createElement('input');
     date.type = 'date';
 
     addTaskBtn.addEventListener('click', () => {
-        console.log('add task');
+        newTaskForm.style.display = 'flex';
         addTask();
     });
-
+    
+    
     
     
     const addTask = () => {
+        console.log(tasks);
         newTaskForm.textContent = '';
+        newTaskForm.style.position = 'absolute';
         showInputs();
         addBtn.addEventListener('click', () => {
-            tasks.push(new Task(name.value));
-            tasks.forEach(task => console.log('Title: ' + task.getTitle()));
+            if(name.value.trim().length > 0) {
+                let newTask = new Task(name.value, date.value);
+                tasks.push({id: taskId++, param: newTask});
+            }
             showTasks();
             name.value = '';
+            newTaskForm.classList.add('hide_new_task_form');
+            // setTimeout(() => {
+                newTaskForm.style.display = 'none';
+            // }, 300);
         });
-
     };
 
     const showInputs = () => {
@@ -54,12 +69,44 @@ const Tasks = () => {
         main.appendChild(newTaskForm);
     };
 
+    const changeTaskStatus = () => {
+
+        let tasksElements = document.querySelectorAll('.task');
+        tasksElements.forEach((task) => {
+            let checkbox = task.querySelector('input[type=checkbox]');
+            checkbox.addEventListener('click', (e) => {
+                let currentTask = e.currentTarget;
+                let idOfTask = task.dataset.id;
+
+                let singleTask = tasks.find((obj) => {
+                    return obj.id.toString() == idOfTask;
+                });
+
+                if(singleTask) {
+                    singleTask.param.status = (singleTask.param.status === false) ? true : false;
+                }
+                
+                newTaskForm.textContent = '';
+                renderTasks();
+
+            });
+        });
+
+    };
 
     const showTasks = () => {
         tasksContent.textContent = '';
-        tasks.forEach(task => task.showTask(tasksContent));
+        tasks.forEach(task => task.param.showTask(tasksContent, task.id));
+        changeTaskStatus();
     };
+
+    const renderTasks = () => {
+        newTaskForm.textContent = '';
+        showTasks();
+    }
+
     showTasks();
+
 }
 
 export default Tasks;
