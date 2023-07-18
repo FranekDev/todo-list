@@ -12,6 +12,7 @@ const Tasks = () => {
         { id: taskId++, param: new Task('Testowy task', '18/07/2023') }, 
         { id: taskId++, param: new Task('Testowy task 2', '19/07/2023') }
     ];
+
     const tasksContent = document.createElement('div');
     tasksContent.classList.add('tasks_list');
     main.appendChild(tasksContent);
@@ -27,6 +28,8 @@ const Tasks = () => {
 
     const addBtn = document.createElement('button');
     addBtn.textContent = 'Add';
+    // const labelAddBtn = document.createElement('lab')
+
     const name = document.createElement('input');
     name.type = 'text';
     name.placeholder = 'Task name';
@@ -39,11 +42,7 @@ const Tasks = () => {
         addTask();
     });
     
-    
-    
-    
     const addTask = () => {
-        console.log(tasks);
         newTaskForm.textContent = '';
         newTaskForm.style.position = 'absolute';
         showInputs();
@@ -86,7 +85,6 @@ const Tasks = () => {
                     singleTask.param.status = (singleTask.param.status === false) ? true : false;
                 }
                 
-                newTaskForm.textContent = '';
                 renderTasks();
 
             });
@@ -94,10 +92,28 @@ const Tasks = () => {
 
     };
 
+    const deleteTask = () => {
+        let tasksElements = document.querySelectorAll('.task');
+        tasksElements.forEach((task) => {
+            const taskToDelete = task.querySelector('.delete_task');
+            taskToDelete.addEventListener('click', (e) => {
+                const idOfTask = task.dataset.id;
+                tasks.find((obj, index) => {
+                    if(obj.id.toString() == idOfTask) {
+                        tasks.splice(index, 1);
+                    }
+                })
+                
+                renderTasks();
+            }); 
+        });
+    }
+
     const showTasks = () => {
         tasksContent.textContent = '';
         tasks.forEach(task => task.param.showTask(tasksContent, task.id));
         changeTaskStatus();
+        deleteTask();
     };
 
     const renderTasks = () => {

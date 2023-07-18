@@ -1,4 +1,5 @@
 export class Task {
+
     constructor(title, dueDate) {
         const date = new Date();
         this.title = title;
@@ -9,17 +10,17 @@ export class Task {
     }
 
     getTitle = () => { return this.title; }
+
     markAsRead = () => {
         this.status = true;
-        console.log('mark as read');
         this.changeTaskToRead();
     }
+
     showTask = (tasks, id) => {
         const task = document.createElement('div');
         task.classList.add('task');
         (this.status === false) ? task.classList.add('not_finished') : task.classList.add('finished');
         task.setAttribute('data-id', id);
-        console.log(task.getAttribute('data-id'));
         const title = document.createElement('p');
         title.classList.add('task_title');
 
@@ -37,16 +38,16 @@ export class Task {
 
         const secondaryInfo = document.createElement('div');
         secondaryInfo.classList.add('info');
+
         const date = document.createElement('p');
-        // date.textContent = 'dd/mm/rrrr';
         date.textContent = this.dueDate;
+
         const pickDate = document.createElement('input');
         pickDate.type = 'date';
+
         const remove = document.createElement('div');
+        remove.classList.add('delete_task');
         remove.textContent = 'Del';
-
-        // const trashLogo = require();
-
 
         secondaryInfo.appendChild(date);
         secondaryInfo.appendChild(remove);

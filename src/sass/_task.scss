@@ -47,6 +47,9 @@
     @media (max-width: $layout-breakpoint-small) {
         width: 500px;
     }
+    .delete_task {
+        cursor: pointer;
+    }
 }
 
 .not_finished {

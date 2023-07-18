@@ -29,6 +29,7 @@ main {
         gap: 20px;
         animation: appear;
         animation-duration: .3s;
+        border: 4px solid #3904AB;
         // box-shadow: 0 0 10px $secondary-color;
 
         @keyframes appear {
