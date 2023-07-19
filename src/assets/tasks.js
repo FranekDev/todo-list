@@ -28,11 +28,12 @@ const Tasks = () => {
 
     const addBtn = document.createElement('button');
     addBtn.textContent = 'Add';
-    // const labelAddBtn = document.createElement('lab')
 
     const name = document.createElement('input');
     name.type = 'text';
     name.placeholder = 'Task name';
+    // name.name = 'task_name';
+    // const labelName = document.createElement('label');
 
     const date = document.createElement('input');
     date.type = 'date';

@@ -18,7 +18,7 @@
         @include flex(column, center, flex-start);
         font-weight: bolder;
         margin-top: 30%;
-        gap: 8px;
+        gap: 12px;
 
         a {
             cursor: pointer;
@@ -42,6 +42,68 @@
         span {
             margin-top: 37px;
             margin-left: 120px;
+        }
+    }
+
+    .projects {
+        @include flex(column, center, flex-start);
+        gap: 10px;
+        margin-top: 5px;
+
+        span {
+            margin-left: -15px;
+            font-size: 1.1em;
+        }
+        
+        a {
+            font-size: 0.9em;
+        }
+
+        .projects_list {
+            @include flex(column, center, flex-start);
+            gap: 8px;
+            width: 100px;
+
+            a {
+                width: 100%;
+                overflow-wrap: break-word;
+            }
+
+            
+        }
+
+        .new_projects {
+            button {
+                width: 100px;
+                border: 2px solid #3904AB;
+                color: #3904AB;
+                font-weight: bolder;
+                border-radius: 10px;
+                padding: 2px 5px;
+                background: none;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #3904AB;
+                    color: $secondary-color;
+                }
+            }
+
+            input[type=text] {
+                margin-bottom: 10px;
+                width: 100px;
+                display: none;
+                padding: 3px 5px;
+                background: none;
+                border: 2px solid #3904AB;
+                color: $font-color;
+                font-weight: bold;
+                border-radius: 11px;
+
+                &:focus {
+                    outline: none;
+                }
+            }
         }
     }
 }
