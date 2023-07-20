@@ -1,0 +1,42 @@
+@use './styles' as *;
+
+@media (max-width: $layout-breakpoint-mobile) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main_content {
+        width: 100vw;
+
+        header {
+            p {
+                font-size: 85px;
+            }
+        }
+
+        .task_content {
+            width: auto;
+
+            .main_tasks {
+
+                .tasks_list {
+
+                    .task {
+                        font-size: 0.95em;
+                        width: 330px;
+                        height: auto;
+                        max-height: 70px;
+
+                        .task_title {
+                            width: 130px;
+                            word-wrap: break-word;
+                            margin: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
