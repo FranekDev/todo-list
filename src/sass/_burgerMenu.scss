@@ -1,6 +1,8 @@
 @use './styles' as *;
 
 .burger_menu {
+    display: none;
+
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -11,7 +13,7 @@
     border-radius: 17px;
     color:white;
     background-color: $secondary-color;
-    @include flex(column, center, center);
+    // @include flex(column, center, center);
     gap: 6px;
     cursor: pointer;
     
@@ -90,6 +92,65 @@
         }
         to {
             transform: rotate(0);
+        }
+    }
+
+    @keyframes slowlyShow {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+@media all and (max-width: $layout-breakpoint-mobile) {
+
+    .burger_menu {
+        @include flex(column, center, center);
+    }
+
+    .sidebar {
+        animation: showSidebar .3s forwards;
+        .bg_text {
+            display: none;
+        }
+
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        margin-bottom: 100px;
+        transform: translate(-50%);
+        display: flex;
+        height: auto;
+        width: 80%;
+        
+        .sidebar_bg {
+            box-shadow: 0 0 10px $secondary-color;
+            @include flex(column, center, center);
+            .todo_nav {
+                margin: 40px 0;
+            }
+        }
+
+        @keyframes showSidebar {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hideSidebar {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                z-index: -1;
+            }
         }
     }
 }

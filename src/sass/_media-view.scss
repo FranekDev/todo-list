@@ -1,6 +1,10 @@
 @use './styles' as *;
 
-@media (max-width: $layout-breakpoint-mobile) {
+@media all and (max-width: $layout-breakpoint-mobile) {
+
+    .burger_menu {
+        @include flex(column, center, center);
+    }
 
     .sidebar {
         display: none;

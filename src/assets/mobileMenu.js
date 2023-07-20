@@ -20,22 +20,28 @@ const MobileMenu = () => {
     
     body.appendChild(burgerMenu);
 
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'none';
+
     let showMenu = false;
     burgerMenu.addEventListener('click', () => {
         
         if(!showMenu) {
-            topLine.classList.remove('deactivate');
-            middleLine.classList.remove('deactivate');
-            bottomLine.classList.remove('deactivate');
             topLine.style.position = 'absolute';
             middleLine.style.position = 'absolute';
             bottomLine.style.position = 'absolute';
+            topLine.classList.remove('deactivate');
+            middleLine.classList.remove('deactivate');
+            bottomLine.classList.remove('deactivate');
             topLine.classList.add('active');
             middleLine.classList.add('active');
             bottomLine.classList.add('active');
+            sidebar.style.display = 'flex';
+            sidebar.style.animation = 'showSidebar .3s forwards';
             showMenu = true;
         }
         else {
+            
             topLine.classList.remove('active');
             middleLine.classList.remove('active');
             bottomLine.classList.remove('active');
@@ -44,12 +50,17 @@ const MobileMenu = () => {
             bottomLine.classList.add('deactivate');
 
             setTimeout(() => {
-            topLine.style.position = 'static';
-            middleLine.style.position = 'static';
-            bottomLine.style.position = 'static';
+                topLine.style.position = 'static';
+                middleLine.style.position = 'static';
+                bottomLine.style.position = 'static';
+                
+                // topLine.style.animation = 'slowlyShow 1s';
+                // middleLine.style.animation = 'slowlyShow 1s';
+                // bottomLine.style.animation = 'slowlyShow 1s';
             }, 400);
 
             showMenu = false;
+            sidebar.style.animation = 'hideSidebar .3s forwards';
         }
     });
 };

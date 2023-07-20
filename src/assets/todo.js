@@ -78,7 +78,6 @@ const TODO = () => {
 
     const projectHighlight = () => {
         const projectsToHighlight = document.querySelectorAll('.project_name');
-        console.log(projectsToHighlight.length);
         projectsToHighlight.forEach(project => {
             project.addEventListener('click', () => {
                 ui.resetAllProjects();
