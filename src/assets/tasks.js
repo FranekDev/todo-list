@@ -1,8 +1,7 @@
 import Task from './task';
 import Project from './Project';
 
-const Tasks = (project) => {
-    // console.log('Project: ', project);
+const Tasks = (project) => {0
 
     const content = document.querySelector('.task_content');
     
@@ -11,7 +10,6 @@ const Tasks = (project) => {
     content.appendChild(main);
 
     let tasks = project.getTasks();
-    // console.log('Tasks: ', tasks);
     let taskId = 1;
 
     const tasksContent = document.createElement('div');
@@ -36,13 +34,18 @@ const Tasks = (project) => {
     const date = document.createElement('input');
     date.type = 'date';
 
-    addTaskBtn.addEventListener('click', () => {
-        newTaskForm.style.display = 'flex';
-        addTask();
-    });
+    const shotNewTaskForm = () => {
+        addTaskBtn.addEventListener('click', () => {
+            newTaskForm.style.display = 'flex';
+            console.log(newTaskForm.style.opacity);
+            addTask();
+        });
+    };
+    shotNewTaskForm();
     
     const addTask = () => {
         const sidebar = document.querySelector('.sidebar');
+
         const mainContent = document.querySelector('.main_content');
         
         sidebar.style.animation = 'decreaseOpacity .5s forwards';
@@ -59,15 +62,16 @@ const Tasks = (project) => {
                 project.addTask({ id: taskId++, param: newTask });
             }
 
-            showTasks();
-
             sidebar.style.opacity = '1';
             mainContent.style.opacity = '1';
             sidebar.style.animation = 'increaseOpacity .5s forwards';
             mainContent.style.animation = 'increaseOpacity .5s forwards';
             name.value = '';
-            newTaskForm.classList.add('hide_new_task_form');
-            newTaskForm.style.animation = 'hideTaskForm .7s forwards';
+            // newTaskForm.classList.add('hide_new_task_form');
+            // newTaskForm.style.animation = 'hideTaskForm .4s forwards';
+            newTaskForm.style.display = 'none';
+            
+            showTasks();
 
         });
     };
@@ -88,7 +92,7 @@ const Tasks = (project) => {
 
         tasksElements.forEach((task) => {
             let checkbox = task.querySelector('input[type=checkbox]');
-            
+
             checkbox.addEventListener('click', (e) => {
                 let currentTask = e.currentTarget;
                 let idOfTask = task.dataset.id;

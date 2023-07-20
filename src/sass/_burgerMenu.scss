@@ -107,12 +107,18 @@
 
 @media all and (max-width: $layout-breakpoint-mobile) {
 
+    // .sidebar {
+    //     display: none;
+    // }
+
     .burger_menu {
         @include flex(column, center, center);
     }
 
-    .sidebar {
+    .sidebar_mobile {
+        // display: none;
         animation: showSidebar .3s forwards;
+        // font-size: 1.05em;
         .bg_text {
             display: none;
         }
