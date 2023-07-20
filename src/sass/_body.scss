@@ -9,7 +9,22 @@
 body {
     background-color: $main-color;
     font-family: $font-family;
-    @include flex(row, space-between, center);
+    width: 100vw;
+    height: 100vh;
+    @include flex(row-reverse, space-between, flex-start);
+
+    .main_content {
+        @include flex(column, space-between, center);
+        height: 100vh;
+
+        .task_content {
+
+            .main_tasks {
+                @include flex(column, center, center);
+                gap: 20px;
+            }
+        }
+    }
 }
 
 .content {

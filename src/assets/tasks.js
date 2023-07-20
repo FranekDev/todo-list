@@ -1,17 +1,18 @@
-import { Task } from './task';
+import Task from './task';
+import Project from './Project';
 
-const Tasks = () => {
+const Tasks = (project) => {
+    console.log('Project: ', project);
 
-    const content = document.querySelector('.content');
-    const main = document.createElement('main');
+    const content = document.querySelector('.task_content');
+    
+    const main = document.createElement('div');
+    main.classList.add('main_tasks');
     content.appendChild(main);
 
+    let tasks = project.getTasks();
+    console.log('Tasks: ', tasks);
     let taskId = 1;
-
-    let tasks = [ 
-        { id: taskId++, param: new Task('Testowy task', '18/07/2023') }, 
-        { id: taskId++, param: new Task('Testowy task 2', '19/07/2023') }
-    ];
 
     const tasksContent = document.createElement('div');
     tasksContent.classList.add('tasks_list');
@@ -22,7 +23,6 @@ const Tasks = () => {
     addTaskBtn.textContent = '+ add task';
     main.appendChild(addTaskBtn);
 
-
     const newTaskForm = document.createElement('div');
     newTaskForm.classList.add('new_task_form');
 
@@ -32,8 +32,6 @@ const Tasks = () => {
     const name = document.createElement('input');
     name.type = 'text';
     name.placeholder = 'Task name';
-    // name.name = 'task_name';
-    // const labelName = document.createElement('label');
 
     const date = document.createElement('input');
     date.type = 'date';
@@ -50,7 +48,7 @@ const Tasks = () => {
         addBtn.addEventListener('click', () => {
             if(name.value.trim().length > 0) {
                 let newTask = new Task(name.value, date.value);
-                tasks.push({id: taskId++, param: newTask});
+                project.addTask({ id: taskId++, param: newTask });
             }
             showTasks();
             name.value = '';
@@ -83,7 +81,7 @@ const Tasks = () => {
                 });
 
                 if(singleTask) {
-                    singleTask.param.status = (singleTask.param.status === false) ? true : false;
+                    singleTask.param.setStatus((singleTask.param.status === false) ? true : false);
                 }
                 
                 renderTasks();
@@ -123,7 +121,6 @@ const Tasks = () => {
     }
 
     showTasks();
-
 }
 
 export default Tasks;

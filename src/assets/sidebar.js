@@ -1,8 +1,16 @@
+import Project from './Project';
+import UI from './UI';
+
 const Sidebar = () => {
+    let ui = new UI();
+    // ui.showProject();
     const body = document.querySelector('body');
     const sidebar = document.createElement('aside');
     sidebar.classList.add('sidebar');
     body.appendChild(sidebar);
+
+    const sidebarBackground = document.createElement('div');
+    sidebarBackground.classList.add('sidebar_bg');
 
     const backgorundText = document.createElement('div');
     backgorundText.classList.add('bg_text');
@@ -27,59 +35,16 @@ const Sidebar = () => {
 
     projects.appendChild(projectsDescription);
 
-    const projectsList = document.createElement('div');
-    projectsList.classList.add('projects_list');
-
-    const mainProject = document.createElement('a');
-    mainProject.textContent = 'Main Project';
-    
-    projectsList.appendChild(mainProject);
-
-    const newProjects = document.createElement('div');
-    newProjects.classList.add('new_projects');
-
-    const newProjectInput = document.createElement('input');
-    newProjectInput.type = 'text';
-    newProjects.appendChild(newProjectInput);
-
-    const newProject = document.createElement('button');
-    newProject.textContent = 'new';
-
-    
-    newProject.addEventListener('click', () => {
-        let addedTask = false;
-        newProjectInput.style.display = 'block';
-        newProject.textContent = 'add';
-        if(newProjectInput.value.trim().length > 0) {
-            const projectToAdd = document.createElement('a');
-            projectToAdd.textContent = newProjectInput.value;
-            projectsList.appendChild(projectToAdd);
-            newProjectInput.value = '';
-            addedTask = true;
-        }
-        hideAddTask(addedTask);
-    });
-
-    const hideAddTask = (addedTask) => {
-        if(addedTask) {
-            addedTask = false;
-            newProject.textContent = 'new';
-            newProjectInput.style.display = 'none';
-        }
-    };
-    
-    newProjects.appendChild(newProject);
-
-    projects.appendChild(projectsList);
-    projects.appendChild(newProjects);
-
     nav.appendChild(today);
     nav.appendChild(thisWeek);
     nav.appendChild(projects);
     
-    sidebar.appendChild(nav);
-    sidebar.appendChild(backgorundText);
+    sidebarBackground.appendChild(nav);
+    sidebarBackground.appendChild(backgorundText);
+    
+    sidebar.appendChild(sidebarBackground);
 
 }
+
 
 export default Sidebar;

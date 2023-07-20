@@ -1,6 +1,7 @@
 const Footer = () => {
 
-    const content = document.querySelector('.content');
+    // const content = document.querySelector('.content');
+    const mainContent = document.querySelector('.main_content');
     const footer = document.createElement('footer');
     const githubLink = document.createElement('a');
 
@@ -10,7 +11,7 @@ const Footer = () => {
     githubLink.setAttribute('target', '_blank');
 
     footer.appendChild(githubLink);
-    content.appendChild(footer);
+    mainContent.appendChild(footer);
 
 };
 
