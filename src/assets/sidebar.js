@@ -29,7 +29,7 @@ const Sidebar = () => {
     dateFormats.forEach(dateFormat => {
         const element = document.createElement('li');
         const link = document.createElement('a');
-        link.classList.add('date_link', 'project_name');
+        link.classList.add('date_link', 'project_namejkl');
         link.textContent = dateFormat;
         element.appendChild(link);
         dateLinks.appendChild(link);

@@ -4,3 +4,22 @@
     justify-content: $justify;
     align-items: $align;
 }
+
+@mixin animateOpacity() {
+     @keyframes decreaseOpacity {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0.5;
+        }
+    }
+    @keyframes increaseOpacity {
+        from {
+            opacity: 0.5;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}

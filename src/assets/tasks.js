@@ -42,36 +42,53 @@ const Tasks = (project) => {
     });
     
     const addTask = () => {
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main_content');
+        
+        sidebar.style.animation = 'decreaseOpacity .5s forwards';
+        mainContent.style.animation = 'decreaseOpacity .5s forwards';
         newTaskForm.textContent = '';
         newTaskForm.style.position = 'absolute';
+
         showInputs();
+
         addBtn.addEventListener('click', () => {
+
             if(name.value.trim().length > 0) {
                 let newTask = new Task(name.value, date.value);
                 project.addTask({ id: taskId++, param: newTask });
             }
+
             showTasks();
+
+            sidebar.style.opacity = '1';
+            mainContent.style.opacity = '1';
+            sidebar.style.animation = 'increaseOpacity .5s forwards';
+            mainContent.style.animation = 'increaseOpacity .5s forwards';
             name.value = '';
             newTaskForm.classList.add('hide_new_task_form');
-            // setTimeout(() => {
-                newTaskForm.style.display = 'none';
-            // }, 300);
+            newTaskForm.style.animation = 'hideTaskForm .7s forwards';
+
         });
     };
 
     const showInputs = () => {
-        
+        const body = document.querySelector('body');
+
         newTaskForm.appendChild(name);
         newTaskForm.appendChild(date);
         newTaskForm.appendChild(addBtn);
-        main.appendChild(newTaskForm);
+
+        body.appendChild(newTaskForm);
     };
 
     const changeTaskStatus = () => {
 
         let tasksElements = document.querySelectorAll('.task');
+
         tasksElements.forEach((task) => {
             let checkbox = task.querySelector('input[type=checkbox]');
+            
             checkbox.addEventListener('click', (e) => {
                 let currentTask = e.currentTarget;
                 let idOfTask = task.dataset.id;

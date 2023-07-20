@@ -89,6 +89,7 @@ const TODO = () => {
     }
 
 
+ 
     newProject.addEventListener('click', () => {
 
         let addedTask = false;
@@ -121,6 +122,7 @@ const TODO = () => {
  
     changeProjectView();
     projectHighlight();
+
 }
 
 export default TODO;

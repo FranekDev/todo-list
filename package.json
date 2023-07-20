@@ -8,7 +8,8 @@
     "watch": "webpack --watch",
     "serve": "webpack serve --open",
     "build": "webpack --progress",
-    "sass": "sass --watch src/sass/main.scss dist/style.css"
+    "sass": "sass --watch src/sass/main.scss dist/style.css",
+    "launch-gh-pages": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,95 @@
+@use './styles' as *;
+
+.burger_menu {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 30px;
+    width: 60px;
+    height: 55px;
+    border-radius: 17px;
+    color:white;
+    background-color: $secondary-color;
+    @include flex(column, center, center);
+    gap: 6px;
+    cursor: pointer;
+    
+    .top_line, .middle_line, .bottom_line {
+        background-color: $main-color;
+        display: inline;
+        width: 70%;
+        height: 6px;
+        border-radius: 4px;
+    }
+ 
+
+    .middle_line.active {
+        display: none;
+    }
+
+    .top_line.active {
+        position: absolute;
+        animation: rotateTop .5s forwards;
+    }
+
+    .bottom_line.active {
+        position: absolute;
+        animation: rotateBottom .5s forwards;
+    }
+
+    .top_line.deactivate {
+        position: absolute;
+        animation: returnTop .5s forwards;
+    }
+
+    .middle_line.deactivate {
+        display: flex;
+    }
+
+    .bottom_line.deactivate {
+        position: absolute;
+        animation: returnBottom .5s forwards;
+    }
+
+    .line_show {
+        position: relative;
+        display: inline;
+    }
+
+    @keyframes rotateTop {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(45deg);
+        }
+    }
+
+    @keyframes rotateBottom {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(-45deg);
+        }
+    }
+
+    @keyframes returnTop {
+        from {
+            transform: rotate(45deg);
+        }
+        to {
+            transform: rotate(0);
+        }
+    }
+
+    @keyframes returnBottom {
+        from {
+            transform: rotate(-45deg);
+        }
+        to {
+            transform: rotate(0);
+        }
+    }
+}
