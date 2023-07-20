@@ -5,7 +5,7 @@ import Task from './task';
 
 const TODO = () => {
 
-    let ui = new UI();
+    const ui = new UI();
 
     let projectsArray = [new Project('Main project')];
     let activeProject = projectsArray[0];
@@ -25,20 +25,34 @@ const TODO = () => {
 
     const projectsList = document.createElement('div');
     projectsList.classList.add('projects_list');
-
     
     let allProjects = document.querySelectorAll('.project');
 
-    const tasksContent = document.querySelector('.main_tasks');
     
     const mainTasks = document.querySelector('.task_content');
-    
+
+    const changeDateFormatView = () => {
+        const dateLinks = document.querySelectorAll('.date_link');
+        
+        dateLinks.forEach(dateLink => {
+            dateLink.addEventListener('click', () => {
+                ui.resetAllProjects();
+                ui.resetDateFormats();
+                ui.setActiveDateFormat(dateLink);
+            });
+        });
+    }
+    changeDateFormatView();
     const changeProjectView = () => {
-        // console.log('Projects: ' + allProjects.length);
         allProjects.forEach((project, index) => {
+            
             project.addEventListener('click', () => {
                 // zrobic zeby renderowalo Tasks() z argumentem jako obiekt Projectu
+                allProjects.forEach(project => ui.resetProject(project));
+                ui.resetDateFormats();
                 mainTasks.textContent = '';
+                ui.setActiveProject(project);
+                activeProject = projectsArray[index];
                 Tasks(projectsArray[index]);
             });
         });
@@ -47,27 +61,46 @@ const TODO = () => {
 
     const showProjects = () => {
         projectsList.textContent = '';
-        projectsArray.forEach((project) => {
+
+        projectsArray.forEach((project, index) => {
             const projectLink = document.createElement('a');
-            projectLink.classList.add('project');
+            projectLink.classList.add('project', 'project_name');
+            (index === 0) ? projectLink.classList.add('active_project') : '';
             projectLink.textContent = project.getName();
             
             projectsList.appendChild(projectLink);
         });
+
         allProjects = document.querySelectorAll('.project');
     };
+
     showProjects();
+
+    const projectHighlight = () => {
+        const projectsToHighlight = document.querySelectorAll('.project_name');
+        console.log(projectsToHighlight.length);
+        projectsToHighlight.forEach(project => {
+            project.addEventListener('click', () => {
+                ui.resetAllProjects();
+                ui.resetDateFormats();
+                ui.setActiveProject(project);
+            });
+        });
+    }
 
 
     newProject.addEventListener('click', () => {
+
         let addedTask = false;
         newProjectInput.style.display = 'block';
         newProject.textContent = 'add';
+
         if(newProjectInput.value.trim().length > 0) {
             projectsArray.push(new Project(newProjectInput.value));
             newProjectInput.value = '';
             addedTask = true;
         }
+
         hideAddTask(addedTask);
         showProjects();0
         changeProjectView();
@@ -87,6 +120,7 @@ const TODO = () => {
     projects.appendChild(newProjects);
  
     changeProjectView();
+    projectHighlight();
 }
 
 export default TODO;

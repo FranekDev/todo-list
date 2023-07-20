@@ -1,7 +1,7 @@
 @use './styles' as *;
 
 header {
-    width: 80vw;
+    width: auto;
     font-family: $secondary-font;
 
     p {
@@ -11,4 +11,9 @@ header {
         font-size: 130px;
         margin: 0 auto;
     }
+}
+
+.main_content {
+    width: 100%;
+    @include flex(column, space-between, center);
 }

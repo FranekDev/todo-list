@@ -23,9 +23,15 @@
 
             a {
                 cursor: pointer;
+                padding: 3px 6px;
+            }
 
-                &:active {
-                    border-bottom: 2px solid red;
+            ul {
+                @include flex(column, center, flex-start);
+
+                .active_project {
+                    border-radius: 9px;
+                    background-color: #4700e0;
                 }
             }
         }
@@ -60,7 +66,14 @@
 
                 a {
                     width: 100%;
+                    text-align: center;
                     overflow-wrap: break-word;
+                    padding: 3px 6px;
+                }
+
+                .active_project {
+                    border-radius: 9px;
+                    background-color: #4700e0;
                 }
 
                 

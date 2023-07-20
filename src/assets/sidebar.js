@@ -21,11 +21,25 @@ const Sidebar = () => {
     const nav = document.createElement('nav');
     nav.classList.add('todo_nav');
     
-    const today = document.createElement('a');
-    const thisWeek = document.createElement('a');
+
+    const dateLinks = document.createElement('ul');
+    dateLinks.classList.add('date_links');
+    let dateFormats = ['Today', 'This week'];
+
+    dateFormats.forEach(dateFormat => {
+        const element = document.createElement('li');
+        const link = document.createElement('a');
+        link.classList.add('date_link', 'project_name');
+        link.textContent = dateFormat;
+        element.appendChild(link);
+        dateLinks.appendChild(link);
+    });
+
+    // const today = document.createElement('a');
+    // const thisWeek = document.createElement('a');
     
-    today.textContent = 'Today';
-    thisWeek.textContent = 'This week';
+    // today.textContent = 'Today';
+    // thisWeek.textContent = 'This week';
 
     const projects = document.createElement('div');
     projects.classList.add('projects');
@@ -35,13 +49,14 @@ const Sidebar = () => {
 
     projects.appendChild(projectsDescription);
 
-    nav.appendChild(today);
-    nav.appendChild(thisWeek);
+    // nav.appendChild(today);
+    // nav.appendChild(thisWeek);
+    nav.appendChild(dateLinks);
     nav.appendChild(projects);
     
     sidebarBackground.appendChild(nav);
     sidebarBackground.appendChild(backgorundText);
-    
+
     sidebar.appendChild(sidebarBackground);
 
 }

@@ -11,11 +11,11 @@ body {
     font-family: $font-family;
     width: 100vw;
     height: 100vh;
-    @include flex(row-reverse, space-between, flex-start);
+    @include flex(row-reverse, space-between, center);
 
     .main_content {
         @include flex(column, space-between, center);
-        height: 100vh;
+        height: 100%;
 
         .task_content {
 
@@ -25,11 +25,4 @@ body {
             }
         }
     }
-}
-
-.content {
-    width: 100%;
-    height: 100vh;
-    @include flex(column, space-between, center);
-    gap: 20px;
 }

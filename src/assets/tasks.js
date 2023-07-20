@@ -2,7 +2,7 @@ import Task from './task';
 import Project from './Project';
 
 const Tasks = (project) => {
-    console.log('Project: ', project);
+    // console.log('Project: ', project);
 
     const content = document.querySelector('.task_content');
     
@@ -11,7 +11,7 @@ const Tasks = (project) => {
     content.appendChild(main);
 
     let tasks = project.getTasks();
-    console.log('Tasks: ', tasks);
+    // console.log('Tasks: ', tasks);
     let taskId = 1;
 
     const tasksContent = document.createElement('div');
