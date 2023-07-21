@@ -67,15 +67,38 @@
             .projects_list {
                 @include flex(column, center, flex-start);
                 gap: 8px;
-                width: 100px;
+                width: 120px;
 
-                a {
+                .project_name_container {
                     width: 100%;
-                    text-align: center;
-                    overflow-wrap: break-word;
-                    padding: 3px 6px;
-                }
+                    @include flex(row, space-between, center);
 
+                    &:hover {
+                        background-color: #4700e0;
+                        border-radius: 9px;
+                        .x_icon{
+                            display: block;
+                            width: 18px;
+                            height: auto;
+                            margin-right: 2px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    a {
+                        @include flex(row, space-between, center);
+                        width: 100%;
+                        text-align: center;
+                        overflow-wrap: break-word;
+                        padding: 3px 6px;
+
+                        
+                    }
+                    
+                    .x_icon{
+                        display: none;
+                    }
+                }
                 .active_project {
                     border-radius: 9px;
                     background-color: #4700e0;

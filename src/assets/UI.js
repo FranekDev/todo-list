@@ -23,14 +23,21 @@ export default class UI {
         secondaryInfo.classList.add('info');
 
         const date = document.createElement('p');
+        date.classList.add('date');
+        if(dueDate == '') {
+            this.showCalendarIcon(date);
+        }
+        else {
         date.textContent = dueDate;
+        }
 
         const pickDate = document.createElement('input');
         pickDate.type = 'date';
 
         const remove = document.createElement('div');
         remove.classList.add('delete_task');
-        remove.textContent = 'Del';
+        // remove.textContent = 'Del';
+        this.showTrashIcon(remove);
 
         secondaryInfo.appendChild(date);
         secondaryInfo.appendChild(remove);
@@ -95,5 +102,75 @@ export default class UI {
                 dateLink.classList.remove('active_project');
             }
         });
+    }
+
+    showTrashIcon(node) {
+        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+        iconSvg.setAttribute('fill', '#676767');
+        iconSvg.setAttribute('viewBox', '0 0 24 24');
+        iconSvg.setAttribute('stroke', '');
+        iconSvg.classList.add('trash_icon');
+
+        iconPath.setAttribute(
+            'd',
+            'M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12M8 9h8v10H8V9m7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5Z' 
+        );
+        iconPath.setAttribute('stroke-linecap', 'round');
+        iconPath.setAttribute('stroke-linejoin', 'round');
+        iconPath.setAttribute('stroke-width', '0');
+
+        iconSvg.appendChild(iconPath);
+        // console.log(iconSvg);
+
+        return node.appendChild(iconSvg);
+    }
+
+    showCalendarIcon(node) {
+        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+        iconSvg.setAttribute('fill', '#676767');
+        iconSvg.setAttribute('viewBox', '0 0 24 24');
+        iconSvg.setAttribute('stroke', '');
+        iconSvg.classList.add('calendar_icon');
+
+        iconPath.setAttribute(
+            'd',
+            'M12 12h5v5h-5v-5m7-9h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 2v2H5V5h14M5 19V9h14v10H5Z' 
+        );
+        iconPath.setAttribute('stroke-linecap', 'round');
+        iconPath.setAttribute('stroke-linejoin', 'round');
+        iconPath.setAttribute('stroke-width', '0');
+
+        iconSvg.appendChild(iconPath);
+        // console.log(iconSvg);
+
+        return node.appendChild(iconSvg);
+    }
+
+    showX(node) {
+        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+        iconSvg.setAttribute('fill', '#676767');
+        iconSvg.setAttribute('viewBox', '0 0 256 256');
+        iconSvg.setAttribute('stroke', '');
+        iconSvg.classList.add('x_icon');
+
+        iconPath.setAttribute(
+            'd',
+            'M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z' 
+        );
+
+        iconPath.setAttribute('stroke-linecap', 'round');
+        iconPath.setAttribute('stroke-linejoin', 'round');
+        iconPath.setAttribute('stroke-width', '0');
+
+        iconSvg.appendChild(iconPath);
+        // console.log(iconSvg);
+
+        return node.appendChild(iconSvg);
     }
 }

@@ -10,7 +10,12 @@ export default class LocalStorage {
     }
 
     saveProject(projectToSave) {
+        if(this.checkIfProjectExists(projectToSave) == null) {
         localStorage.setItem(projectToSave.name, JSON.stringify(projectToSave));
+        }
+        else {
+            alert('projekt ' + projectToSave.name + ' juz istanieje');
+        }
         // this.project = projectToSave;
     }
 
@@ -59,6 +64,10 @@ export default class LocalStorage {
         }
         projectData.tasks = tasks;
         localStorage.setItem(projectData.name, JSON.stringify(projectData));
+    }
+
+    removeProject(project) {
+        localStorage.removeItem(project.name);
     }
 
 

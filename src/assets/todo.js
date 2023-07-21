@@ -12,13 +12,13 @@ const TODO = () => {
 
     let projectToSave = new Project('Main project');
     if(storage.checkIfProjectExists(projectToSave) == null) {
+        projectToSave.addDate = new Date(0);
         storage.saveProject(projectToSave);
     }
 
-    let firstProject = storage.getProjects();
-    console.log(firstProject);
+    let firstProject = storage.getProjects()[0];
 
-    Tasks(firstProject[0], storage);
+    Tasks(firstProject, storage);
     const projects = document.querySelector('.projects');
 
     const newProjects = document.createElement('div');
@@ -34,7 +34,7 @@ const TODO = () => {
     const projectsList = document.createElement('div');
     projectsList.classList.add('projects_list');
     
-    let allProjects = document.querySelectorAll('.project');
+    let allProjects = document.querySelectorAll('.project_name_container');
 
     
     const mainTasks = document.querySelector('.task_content');
@@ -47,46 +47,71 @@ const TODO = () => {
                 ui.resetAllProjects();
                 ui.resetDateFormats();
                 ui.setActiveDateFormat(dateLink);
+                // console.log(dateLink.textContent);
             });
         });
     }
     changeDateFormatView();
     const changeProjectView = () => {
-        allProjects = document.querySelectorAll('.project');
+        allProjects = document.querySelectorAll('.project_name_container');
         firstProject = storage.getProjects();
         let activeProject = '';
         
         allProjects.forEach((project, index) => {
-            
-            project.addEventListener('click', () => {
-                console.log('Project name: ', project.textContent);
-                allProjects.forEach(project => ui.resetProject(project));
+            let p = project.querySelector('.project');
+            p.addEventListener('click', () => {
+                ui.resetAllProjects();
+                allProjects.forEach(p => ui.resetProject(p));
                 ui.resetDateFormats();
                 mainTasks.textContent = '';
-                ui.setActiveProject(project);
-                activeProject = firstProject[index];
+                ui.setActiveProject(p);
+                activeProject = ((firstProject[index] == null) ? firstProject[0] : firstProject[index]);
                 Tasks(activeProject, storage);
+            });
+
+            let remove = project.querySelector('.x_icon');
+            remove.addEventListener('click', () => {
+                let projects = storage.getProjects().sort((p1, p2) => { 
+                    return new Date(p1.addDate) - new Date(p2.addDate);
+                });;
+                if(activeProject.name != projects[index]) {
+                ui.resetProject(remove);
+                storage.removeProject(projects[index]);
+                }
+                showProjects();
             });
         });
     };
     changeProjectView();
 
-
     
     const showProjects = () => {
         let localProjects = storage.getProjects();
+        
+        localProjects.sort((p1, p2) => { 
+            return new Date(p1.addDate) - new Date(p2.addDate);
+        });
+
         projectsList.textContent = '';
 
         localProjects.forEach((project, index) => {
+            const projectNameContainer = document.createElement('div');
+            projectNameContainer.classList.add('project_name_container');
+
             const projectLink = document.createElement('a');
             projectLink.classList.add('project', 'project_name');
+
             (index === 0) ? projectLink.classList.add('active_project') : '';
+
             projectLink.textContent = project.name;
+            // projectLink.textContent += ui.showX();
+            projectNameContainer.appendChild(projectLink);
+            ui.showX(projectNameContainer);
             
-            projectsList.appendChild(projectLink);
+            projectsList.appendChild(projectNameContainer);
         });
 
-        allProjects = document.querySelectorAll('.project');
+        allProjects = document.querySelectorAll('.project_name_container');
     };
 
     showProjects();
@@ -105,6 +130,9 @@ const TODO = () => {
 
  
     newProject.addEventListener('click', () => {
+
+        const projects = document.querySelectorAll('.project_name_container');
+        projects.forEach(project => { ui.resetProject(project);});
 
         let addedTask = false;
         newProjectInput.style.display = 'block';

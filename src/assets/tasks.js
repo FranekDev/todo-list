@@ -5,7 +5,7 @@ import UI from './UI';
 const Tasks = (project, storage) => {
     const ui = new UI();
 
-    console.log('Active project', project);
+    // console.log('Active project', project);
 
 
     const content = document.querySelector('.task_content');

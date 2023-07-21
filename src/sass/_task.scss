@@ -23,8 +23,14 @@
     @media (max-width: $layout-breakpoint-small) {
         width: 500px;
     }
-    .delete_task {
+    .delete_task, .date {
+        @include flex(row, center, center);
         cursor: pointer;
+    }
+
+    .trash_icon, .calendar_icon {
+        width: 22px;
+        height: auto;
     }
 }
 
