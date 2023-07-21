@@ -2,6 +2,10 @@
 
 @media all and (max-width: $layout-breakpoint-mobile) {
 
+    .add_task {
+        margin-bottom: 60px;
+    }
+
     .burger_menu {
         @include flex(column, center, center);
     }

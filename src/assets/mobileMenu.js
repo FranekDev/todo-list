@@ -74,6 +74,9 @@ const MobileMenu = () => {
             sidebar.style.display = 'none';
         }
     });
+
+    
+  
 };
 
 export default MobileMenu;

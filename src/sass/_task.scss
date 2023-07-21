@@ -32,6 +32,21 @@
         width: 22px;
         height: auto;
     }
+
+    .input_date {
+        cursor: pointer;
+        border: none;
+        padding: 2px;
+        width: 27px;
+        margin: 0;
+        font-size: 1.1em;
+        background: none;
+        color: #7c7c7c;
+
+        &:focus {
+            outline: none;
+        }
+    }
 }
 
 .not_finished {

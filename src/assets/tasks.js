@@ -144,6 +144,8 @@ const Tasks = (project, storage) => {
     }
 
     const showTasks = () => {
+        const inputDate = document.querySelectorAll('.input_date');
+        inputDate.forEach(input => { input.style.display = 'none';});
         tasksContent.textContent = '';
         tasks = storage.getTasks(project);
         tasks.forEach((task, index) => {
@@ -151,12 +153,36 @@ const Tasks = (project, storage) => {
         });
         changeTaskStatus();
         deleteTask();
+        updateDueDate();
     };
 
     const renderTasks = () => {
         newTaskForm.textContent = '';
         showTasks();
     }
+
+    const updateDueDate = () => {
+
+        let tasksElements = document.querySelectorAll('.task');
+
+        tasksElements.forEach((task) => {
+            const inputDate = task.querySelector('.input_date');
+            inputDate.addEventListener('input', () => {
+                const idOfTask = task.dataset.id;
+                tasks.find((obj, index) => {
+                    if(index == idOfTask) {
+                        // inputDate.classList.remove('input_date');
+                        // inputDate.style.display = 'block';
+                        tasks[idOfTask].dueDate = ui.formatDate(inputDate.value);
+                        storage.updateTasks(tasks, project);
+                        showTasks();
+                    }
+                })
+                
+                renderTasks();
+            });
+        });
+    };
 
     showTasks();
 }

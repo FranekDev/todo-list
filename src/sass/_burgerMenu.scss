@@ -2,9 +2,8 @@
 
 .burger_menu {
     display: none;
-    // test
     -webkit-tap-highlight-color: transparent;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translate(-50%);
@@ -14,7 +13,6 @@
     border-radius: 17px;
     color:white;
     background-color: $secondary-color;
-    // @include flex(column, center, center);
     gap: 6px;
     cursor: pointer;
     
@@ -108,16 +106,12 @@
 
 @media all and (max-width: $layout-breakpoint-mobile) {
 
-    // .sidebar {
-    //     display: none;
-    // }
 
     .burger_menu {
         @include flex(column, center, center);
     }
 
     .sidebar_mobile {
-        // display: none;
         animation: showSidebar .3s forwards;
         // font-size: 1.05em;
         .bg_text {

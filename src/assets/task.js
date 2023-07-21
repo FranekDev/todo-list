@@ -26,4 +26,8 @@ export default class Task {
         this.status = statusToSet;
     }
 
+    setDueDate(date) {
+        this.dueDate = date;
+    }
+
 };

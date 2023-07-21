@@ -24,21 +24,28 @@ export default class UI {
 
         const date = document.createElement('p');
         date.classList.add('date');
-        if(dueDate == '') {
-            this.showCalendarIcon(date);
-        }
-        else {
-        date.textContent = dueDate;
-        }
 
         const pickDate = document.createElement('input');
         pickDate.type = 'date';
+        pickDate.classList.add('input_date');
+
+        if(dueDate != '') {
+            // this.showCalendarIcon(date);
+            date.textContent = dueDate;
+            pickDate.style.display = 'none';
+        }
+        // else {
+        //     date.textContent = dueDate;
+        // }
+
+        // pickDate.style.display = 'none';
 
         const remove = document.createElement('div');
         remove.classList.add('delete_task');
         // remove.textContent = 'Del';
         this.showTrashIcon(remove);
 
+        date.appendChild(pickDate);
         secondaryInfo.appendChild(date);
         secondaryInfo.appendChild(remove);
 
@@ -172,5 +179,10 @@ export default class UI {
         // console.log(iconSvg);
 
         return node.appendChild(iconSvg);
+    }
+
+    formatDate(date) {
+        date = date.split('-');
+        return date.reverse().join('/');
     }
 }
