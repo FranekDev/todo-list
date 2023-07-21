@@ -1,5 +1,5 @@
 export default class UI {
-    showTask = (id, status, taskTitle, dueDate) => {
+    showTask = (tasks, id, status, taskTitle, dueDate) => {
         const task = document.createElement('div');
         task.classList.add('task');
         (status === false) ? task.classList.add('not_finished') : task.classList.add('finished');
@@ -38,8 +38,8 @@ export default class UI {
         task.appendChild(mainInfo);
         task.appendChild(secondaryInfo);
 
-
-        return task;
+        tasks.appendChild(task);
+        // return task;
     }
 
     showProject = (projectsArray) => {

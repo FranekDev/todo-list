@@ -23,11 +23,6 @@ const MobileMenu = () => {
     const sidebar = document.querySelector('.sidebar');
     const newTaskForm = document.querySelector('.new_task_form');
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-        console.log(window.screen.width);
-    });
-
     if(window.screen.width <= 600) {
         sidebar.style.display = 'none';
         sidebar.classList.add('sidebar_mobile');

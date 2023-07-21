@@ -1,7 +1,12 @@
 import Task from './task';
 import Project from './Project';
+import UI from './UI';
 
-const Tasks = (project) => {0
+const Tasks = (project, storage) => {
+    const ui = new UI();
+
+    console.log('Active project', project);
+
 
     const content = document.querySelector('.task_content');
     
@@ -9,7 +14,10 @@ const Tasks = (project) => {0
     main.classList.add('main_tasks');
     content.appendChild(main);
 
-    let tasks = project.getTasks();
+    let tasks = storage.getTasks(project);
+    // if(tasks == null) {
+    //     tasks = [];
+    // }
     let taskId = 1;
 
     const tasksContent = document.createElement('div');
@@ -37,7 +45,6 @@ const Tasks = (project) => {0
     const shotNewTaskForm = () => {
         addTaskBtn.addEventListener('click', () => {
             newTaskForm.style.display = 'flex';
-            console.log(newTaskForm.style.opacity);
             addTask();
         });
     };
@@ -59,7 +66,11 @@ const Tasks = (project) => {0
 
             if(name.value.trim().length > 0) {
                 let newTask = new Task(name.value, date.value);
-                project.addTask({ id: taskId++, param: newTask });
+                // project.addTask({ id: taskId++, param: newTask });
+                storage.addTask(newTask, project);
+                // localStorage.setItem(project.getName(), JSON.stringify(project));
+                // storage.saveProject(project);
+            // console.log('ls ', localStorage.getItem(project.getName()));
             }
 
             sidebar.style.opacity = '1';
@@ -93,17 +104,15 @@ const Tasks = (project) => {0
         tasksElements.forEach((task) => {
             let checkbox = task.querySelector('input[type=checkbox]');
 
-            checkbox.addEventListener('click', (e) => {
-                let currentTask = e.currentTarget;
+            checkbox.addEventListener('click', () => {
                 let idOfTask = task.dataset.id;
-
-                let singleTask = tasks.find((obj) => {
-                    return obj.id.toString() == idOfTask;
+                let singleTask = tasks.find((obj, index) => {
+                    return index == idOfTask;
                 });
-
                 if(singleTask) {
-                    singleTask.param.setStatus((singleTask.param.status === false) ? true : false);
+                    tasks[idOfTask].status = (tasks[idOfTask].status == false) ? true : false;
                 }
+                storage.updateTasks(tasks, project);
                 
                 renderTasks();
 
@@ -114,24 +123,32 @@ const Tasks = (project) => {0
 
     const deleteTask = () => {
         let tasksElements = document.querySelectorAll('.task');
+
         tasksElements.forEach((task) => {
+
             const taskToDelete = task.querySelector('.delete_task');
-            taskToDelete.addEventListener('click', (e) => {
+
+            taskToDelete.addEventListener('click', () => {
                 const idOfTask = task.dataset.id;
                 tasks.find((obj, index) => {
-                    if(obj.id.toString() == idOfTask) {
+                    if(index == idOfTask) {
                         tasks.splice(index, 1);
+                        storage.updateTasks(tasks, project);
                     }
                 })
                 
                 renderTasks();
             }); 
+
         });
     }
 
     const showTasks = () => {
         tasksContent.textContent = '';
-        tasks.forEach(task => task.param.showTask(tasksContent, task.id));
+        tasks = storage.getTasks(project);
+        tasks.forEach((task, index) => {
+            ui.showTask(tasksContent, index, task.status, task.title, task.dueDate);
+        });
         changeTaskStatus();
         deleteTask();
     };
