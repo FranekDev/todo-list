@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Modak&family=Roboto&display=swap');
 
-$main-color: #131313;
+$main-color: #1e293b;
+// $main-color: #18181b;
 $font-color: #E6E6E6;
-// $secondary-color: #3904AB;
-$secondary-color: #5200FF;
-$third-color: #28F8D0;
+// $darker-secondary: #3904AB;
+$darker-secondary: #10b981;
+$secondary-color: #34d399;
+// $secondary-color: #5200FF;
+$third-color: #34d399;
 $read-color: #676767;
+$active-project-bg: #059669;
+// $active-project-bg: #4700e0;
+$header-color: #0f172a;
+
 $read-opacity: .4;
 $font-family: 'Roboto', sans-serif;
 $secondary-font: 'Modak', cursive;
@@ -14,3 +21,12 @@ $input-width: 200px;
 
 $layout-breakpoint-small: 960px;
 $layout-breakpoint-mobile: 600px;
+
+
+// $main-color: #18181b;
+// $font-color: #f7fee7;
+// $secondary-color: #a3e635;
+// $darker-secondary: #84cc16;
+// $third-color: #bef264;
+// $read-color: #676767;
+// $active-project-bg: #4700e0;

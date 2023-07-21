@@ -128,7 +128,7 @@
         width: 80%;
         
         .sidebar_bg {
-            box-shadow: 0 0 10px $secondary-color;
+            // box-shadow: 0 0 10px $secondary-color;
             @include flex(column, center, center);
             .todo_nav {
                 margin: 40px 0;

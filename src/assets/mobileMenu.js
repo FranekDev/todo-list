@@ -34,9 +34,10 @@ const MobileMenu = () => {
 
     let showMenu = false;
     burgerMenu.addEventListener('click', () => {
-        
+        const mainContent = document.querySelector('.main_content');
         (newTaskForm != null) ? newTaskForm.style.display = 'none' : '';
         if(!showMenu) {
+            mainContent.style.animation = 'decreaseOpacity .5s forwards';
             topLine.style.position = 'absolute';
             middleLine.style.position = 'absolute';
             bottomLine.style.position = 'absolute';
@@ -52,6 +53,8 @@ const MobileMenu = () => {
         }
         else {
             
+        mainContent.style.opacity = '1';
+        mainContent.style.animation = 'increaseOpacity .5s forwards';
             topLine.classList.remove('active');
             middleLine.classList.remove('active');
             bottomLine.classList.remove('active');

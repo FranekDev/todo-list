@@ -5,7 +5,7 @@ header {
     font-family: $secondary-font;
 
     p {
-        color: #000000;
+        color: $header-color;
         height: 100px;
         @include flex(column, center, center);
         font-size: 130px;

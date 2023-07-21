@@ -11,7 +11,7 @@
 
 
     .sidebar_bg {
-        border-radius: 10px;
+        border-radius: 15px;
         color: $font-color;
         @include flex(column, space-between, center);
         overflow: hidden;
@@ -36,13 +36,14 @@
 
                 .active_project {
                     border-radius: 9px;
-                    background-color: #4700e0;
+                    background-color: $active-project-bg;
                 }
             }
         }
 
         .bg_text {
-            color: #3904AB;
+            // color: #3904AB;
+            color: $darker-secondary;
             font-family: $secondary-font;
             transform: rotate(-90deg);
             font-size: 130px;
@@ -74,7 +75,7 @@
                     @include flex(row, space-between, center);
 
                     &:hover {
-                        background-color: #4700e0;
+                        background-color: $active-project-bg;
                         border-radius: 9px;
                         .x_icon{
                             display: block;
@@ -101,7 +102,7 @@
                 }
                 .active_project {
                     border-radius: 9px;
-                    background-color: #4700e0;
+                    background-color: $active-project-bg;
                 }
 
                 
@@ -110,8 +111,8 @@
             .new_projects {
                 button {
                     width: 100px;
-                    border: 2px solid #3904AB;
-                    color: #3904AB;
+                    border: 2px solid $darker-secondary;
+                    color: $darker-secondary;
                     font-weight: bolder;
                     border-radius: 10px;
                     padding: 2px 5px;
@@ -119,8 +120,9 @@
                     cursor: pointer;
 
                     &:hover {
-                        background-color: #3904AB;
-                        color: $secondary-color;
+                        background-color: $darker-secondary;
+                        // color: $secondary-color;
+                        color: $main-color;
                     }
                 }
 
@@ -130,7 +132,7 @@
                     display: none;
                     padding: 3px 5px;
                     background: none;
-                    border: 2px solid #3904AB;
+                    border: 2px solid $darker-secondary;
                     color: $font-color;
                     font-weight: bold;
                     border-radius: 11px;

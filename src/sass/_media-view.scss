@@ -12,6 +12,12 @@
 
     .sidebar {
         display: none;
+        // background-color: red;
+        .sidebar_bg {
+            background-color: $main-color;
+            border: 3px solid $secondary-color;
+            box-shadow: 0 0 2px red;
+        }
     }
 
     .main_content {

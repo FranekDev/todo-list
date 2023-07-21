@@ -30,19 +30,12 @@ export default class UI {
         pickDate.classList.add('input_date');
 
         if(dueDate != '') {
-            // this.showCalendarIcon(date);
             date.textContent = dueDate;
             pickDate.style.display = 'none';
         }
-        // else {
-        //     date.textContent = dueDate;
-        // }
-
-        // pickDate.style.display = 'none';
 
         const remove = document.createElement('div');
         remove.classList.add('delete_task');
-        // remove.textContent = 'Del';
         this.showTrashIcon(remove);
 
         date.appendChild(pickDate);
@@ -53,7 +46,6 @@ export default class UI {
         task.appendChild(secondaryInfo);
 
         tasks.appendChild(task);
-        // return task;
     }
 
     showProject = (projectsArray) => {
@@ -129,30 +121,6 @@ export default class UI {
         iconPath.setAttribute('stroke-width', '0');
 
         iconSvg.appendChild(iconPath);
-        // console.log(iconSvg);
-
-        return node.appendChild(iconSvg);
-    }
-
-    showCalendarIcon(node) {
-        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-        iconSvg.setAttribute('fill', '#676767');
-        iconSvg.setAttribute('viewBox', '0 0 24 24');
-        iconSvg.setAttribute('stroke', '');
-        iconSvg.classList.add('calendar_icon');
-
-        iconPath.setAttribute(
-            'd',
-            'M12 12h5v5h-5v-5m7-9h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 2v2H5V5h14M5 19V9h14v10H5Z' 
-        );
-        iconPath.setAttribute('stroke-linecap', 'round');
-        iconPath.setAttribute('stroke-linejoin', 'round');
-        iconPath.setAttribute('stroke-width', '0');
-
-        iconSvg.appendChild(iconPath);
-        // console.log(iconSvg);
 
         return node.appendChild(iconSvg);
     }
@@ -176,7 +144,6 @@ export default class UI {
         iconPath.setAttribute('stroke-width', '0');
 
         iconSvg.appendChild(iconPath);
-        // console.log(iconSvg);
 
         return node.appendChild(iconSvg);
     }
