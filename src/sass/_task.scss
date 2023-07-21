@@ -84,7 +84,7 @@
 }
 
 .finished {
-    border: 3px solid rgb(40, 248, 208, .4);
+    border: 3px solid $task-finished;
     color: rgb(230, 230, 230, .4);
     text-decoration: line-through;
     border-radius: 22px;
@@ -94,10 +94,10 @@
         background-color: $main-color;
         margin: 0;
         font: inherit;
-        color: rgb(40, 248, 208, .4);
+        color: $task-finished;
         width: 1.15em;
         height: 1.15em;
-        border: 0.15em solid rgb(40, 248, 208, .4);
+        border: 0.15em solid $task-finished;
         border-radius: 0.3em;
         transform: translate(-0.075em);
         display: grid;
@@ -110,7 +110,7 @@
             height: 0.6em;
             transform: scale(0);
             transition: 120ms transform ease-in-out;
-            box-shadow: inset 1em 1em rgb(40, 248, 208, .4);
+            box-shadow: inset 1em 1em $task-finished;
             border-radius: 0.1em;
         }
 
