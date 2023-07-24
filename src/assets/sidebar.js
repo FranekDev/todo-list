@@ -1,9 +1,4 @@
-import Project from './Project';
-import UI from './UI';
-
 const Sidebar = () => {
-    let ui = new UI();
-    // ui.showProject();
     const body = document.querySelector('body');
     const sidebar = document.createElement('aside');
     sidebar.classList.add('sidebar');
@@ -35,12 +30,6 @@ const Sidebar = () => {
         dateLinks.appendChild(link);
     });
 
-    // const today = document.createElement('a');
-    // const thisWeek = document.createElement('a');
-    
-    // today.textContent = 'Today';
-    // thisWeek.textContent = 'This week';
-
     const projects = document.createElement('div');
     projects.classList.add('projects');
 
@@ -49,8 +38,6 @@ const Sidebar = () => {
 
     projects.appendChild(projectsDescription);
 
-    // nav.appendChild(today);
-    // nav.appendChild(thisWeek);
     nav.appendChild(dateLinks);
     nav.appendChild(projects);
     

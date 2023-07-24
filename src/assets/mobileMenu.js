@@ -13,6 +13,7 @@ const MobileMenu = () => {
     const bottomLine = document.createElement('div');
     bottomLine.classList.add('bottom_line');
 
+    let newTaskForm = document.querySelector('.new_task_form');
 
     burgerMenu.appendChild(topLine);
     burgerMenu.appendChild(middleLine);
@@ -21,20 +22,16 @@ const MobileMenu = () => {
     body.appendChild(burgerMenu);
 
     const sidebar = document.querySelector('.sidebar');
-    const newTaskForm = document.querySelector('.new_task_form');
 
     if(window.screen.width <= 600) {
         sidebar.style.display = 'none';
         sidebar.classList.add('sidebar_mobile');
     }
-    // else {
-        // sidebar.classList.remove('sidebar_mobile');
-    // }
-    // sidebar.style.display = 'none';
 
     let showMenu = false;
     burgerMenu.addEventListener('click', () => {
         const mainContent = document.querySelector('.main_content');
+        newTaskForm = document.querySelector('.new_task_form');
         (newTaskForm != null) ? newTaskForm.style.display = 'none' : '';
         if(!showMenu) {
             mainContent.style.animation = 'decreaseOpacity .5s forwards';
@@ -50,6 +47,10 @@ const MobileMenu = () => {
             sidebar.style.display = 'flex';
             sidebar.style.animation = 'showSidebar .3s forwards';
             showMenu = true;
+            sidebar.style.position = 'fixed';
+            if(newTaskForm != null) {
+                newTaskForm.style.display = 'none';
+            }
         }
         else {
             

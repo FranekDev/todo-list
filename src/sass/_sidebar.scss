@@ -7,6 +7,9 @@
     // animation: show_sidebar;
     // animation-duration: 1s;
     @include animateOpacity();
+    // position: sticky;
+    // top: 0;
+    // margin-top: -150px;
 
 
 
@@ -24,11 +27,20 @@
             @include flex(column, center, flex-start);
             font-weight: bolder;
             margin-top: 30%;
-            gap: 12px;
+            gap: 10px;
+
+            .date_links {
+                gap: 5px;
+            }
 
             a {
                 cursor: pointer;
                 padding: 3px 6px;
+
+                &:hover {
+                    background-color: $active-project-bg;
+                    border-radius: 9px
+                }
             }
 
             ul {
@@ -121,7 +133,6 @@
 
                     &:hover {
                         background-color: $darker-secondary;
-                        // color: $secondary-color;
                         color: $main-color;
                     }
                 }

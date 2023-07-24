@@ -1,7 +1,6 @@
 import UI from './UI';
 import Project from './Project';
 import Tasks from './tasks';
-import Task from './task';
 import LocalStorage from './localStorage';
 
 const TODO = () => {
@@ -11,14 +10,18 @@ const TODO = () => {
     const storage = new LocalStorage();
 
     let projectToSave = new Project('Main project');
+
     if(storage.checkIfProjectExists(projectToSave) == null) {
         projectToSave.addDate = new Date(0);
         storage.saveProject(projectToSave);
     }
 
-    let firstProject = storage.getProjects()[0];
+    let firstProject = storage.getProjects().sort((p1, p2) => { 
+        return new Date(p1.addDate) - new Date(p2.addDate);
+    })[0];
 
     Tasks(firstProject, storage);
+
     const projects = document.querySelector('.projects');
 
     const newProjects = document.createElement('div');
@@ -35,19 +38,23 @@ const TODO = () => {
     projectsList.classList.add('projects_list');
     
     let allProjects = document.querySelectorAll('.project_name_container');
-
     
     const mainTasks = document.querySelector('.task_content');
 
     const changeDateFormatView = () => {
         const dateLinks = document.querySelectorAll('.date_link');
+        // projectsList = document.querySelector('.projects_list');
+        // const userProjects = document.querySelector('.user_projects');
         
         dateLinks.forEach(dateLink => {
             dateLink.addEventListener('click', () => {
+                console.log(dateLink.textContent);
                 ui.resetAllProjects();
                 ui.resetDateFormats();
                 ui.setActiveDateFormat(dateLink);
-                // console.log(dateLink.textContent);
+                mainTasks.textContent = '';
+                // userProjects.textContent = '';
+                // TODO(dateLink.textContent, storage);
             });
         });
     }
@@ -56,7 +63,9 @@ const TODO = () => {
     const changeProjectView = () => {
         allProjects = document.querySelectorAll('.project_name_container');
 
-        firstProject = storage.getProjects();
+        firstProject = storage.getProjects().sort((p1, p2) => { 
+            return new Date(p1.addDate) - new Date(p2.addDate);
+        });
         let activeProject = '';
         
         allProjects.forEach((project, index) => {
@@ -87,7 +96,7 @@ const TODO = () => {
             });
         });
     };
-    changeProjectView();
+    // changeProjectView();
 
     
     const showProjects = () => {
@@ -98,6 +107,9 @@ const TODO = () => {
         });
 
         projectsList.textContent = '';
+
+        // const userProjects = document.createElement('div');
+        // userProjects.classList.add('user_projects');
 
         localProjects.forEach((project, index) => {
             const projectNameContainer = document.createElement('div');
@@ -113,7 +125,9 @@ const TODO = () => {
             ui.showX(projectNameContainer);
             
             projectsList.appendChild(projectNameContainer);
+            // userProjects.appendChild(projectNameContainer);
         });
+        // projectsList.appendChild(userProjects);
 
         allProjects = document.querySelectorAll('.project_name_container');
     };
@@ -136,7 +150,7 @@ const TODO = () => {
     newProject.addEventListener('click', () => {
 
         const projects = document.querySelectorAll('.project_name_container');
-        projects.forEach(project => { ui.resetProject(project);});
+        projects.forEach(project => { ui.resetProject(project); });
 
         let addedTask = false;
         newProjectInput.style.display = 'block';

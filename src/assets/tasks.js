@@ -1,5 +1,4 @@
 import Task from './task';
-import Project from './Project';
 import UI from './UI';
 
 const Tasks = (project, storage) => {
@@ -12,10 +11,6 @@ const Tasks = (project, storage) => {
     content.appendChild(main);
 
     let tasks = storage.getTasks(project);
-    // if(tasks == null) {
-    //     tasks = [];
-    // }
-    let taskId = 1;
 
     const tasksContent = document.createElement('div');
     tasksContent.classList.add('tasks_list');
@@ -55,7 +50,7 @@ const Tasks = (project, storage) => {
         sidebar.style.animation = 'decreaseOpacity .5s forwards';
         mainContent.style.animation = 'decreaseOpacity .5s forwards';
         newTaskForm.textContent = '';
-        newTaskForm.style.position = 'absolute';
+        newTaskForm.style.position = 'fixed';
 
         showInputs();
 
@@ -63,11 +58,7 @@ const Tasks = (project, storage) => {
 
             if(name.value.trim().length > 0) {
                 let newTask = new Task(name.value, date.value);
-                // project.addTask({ id: taskId++, param: newTask });
                 storage.addTask(newTask, project);
-                // localStorage.setItem(project.getName(), JSON.stringify(project));
-                // storage.saveProject(project);
-            // console.log('ls ', localStorage.getItem(project.getName()));
             }
 
             sidebar.style.opacity = '1';
@@ -122,37 +113,39 @@ const Tasks = (project, storage) => {
         let tasksElements = document.querySelectorAll('.task');
 
         tasksElements.forEach((task) => {
-
             const taskToEdit = task.querySelector('.task_title');
             let secondInfo = task.querySelectorAll('.info')[0];
             
             taskToEdit.addEventListener('click', () => {
+                const taskStatus = task.querySelector('input[type=checkbox]');
                 const idOfTask = task.dataset.id;
-                let currentTitle = taskToEdit.textContent;
-                console.log(idOfTask);
+                const currentTitle = taskToEdit.textContent;
                 
-                taskToEdit.textContent = '';
-                const title = document.createElement('input');
-                title.type = 'text';
+                if(taskStatus.checked == false) {
+                    taskToEdit.textContent = '';
+                    const title = document.createElement('input');
+                    title.type = 'text';
+                    title.value = currentTitle;
+                        
+                    title.addEventListener('blur', (e) => {
+                        title.style.display = 'none';
+                        if(title.value.length > 0) {
+                            taskToEdit.textContent += e.target.value;
+                            tasks.find((obj, index) => {
+                                if(index == idOfTask) {
+                                    tasks[idOfTask].title = title.value;
+                                    storage.updateTasks(tasks, project);
+                                }
+                            });
+                        }
+                        else {
+                            taskToEdit.textContent = currentTitle;
+                        }
+                    });
                     
-                title.addEventListener('blur', (e) => {
-                    title.style.display = 'none';
-                    if(title.value.length > 0) {
-                        taskToEdit.textContent += e.target.value;
-                        tasks.find((obj, index) => {
-                            if(index == idOfTask) {
-                                tasks[idOfTask].title = title.value;
-                                storage.updateTasks(tasks, project);
-                            }
-                        });
-                    }
-                    else {
-                        taskToEdit.textContent = currentTitle;
-                    }
-                });
-
-                secondInfo.insertBefore(title, secondInfo.lastChild);
-                title.focus();
+                    secondInfo.insertBefore(title, secondInfo.lastChild);
+                    title.focus();
+                }
 
             }); 
         });
@@ -167,33 +160,37 @@ const Tasks = (project, storage) => {
             let secondInfo = task.querySelectorAll('.info')[1];
 
             taskToEdit.addEventListener('click', () => {
+                
+                const taskStatus = task.querySelector('input[type=checkbox]');
                 const idOfTask = task.dataset.id;
                 let currentDate = taskToEdit.textContent;
                 
-                if(currentDate.length > 0) {
-                    taskToEdit.textContent = '';
-                    const datePicker = document.createElement('input');
-                    datePicker.type = 'date';
-                    datePicker.value = currentDate.split('/').reverse().join('-');
-                    
-                    datePicker.addEventListener('blur', () => {
-                        datePicker.style.display = 'none';
-                        if(datePicker.value.length > 0) {
-                            taskToEdit.textContent = datePicker.value.split('-').reverse().join('/');
-                            tasks.find((obj, index) => {
-                                if(index == idOfTask) {
-                                    tasks[idOfTask].dueDate = ui.formatDate(datePicker.value);
-                                    storage.updateTasks(tasks, project);
-                                }
-                            });
-                        }
-                        else {
-                            taskToEdit.textContent = ui.formatDate(currentDate);
-                        }
-                    });
-                    
-                    secondInfo.insertBefore(datePicker, secondInfo.firstChild);
-                    datePicker.focus();
+                if(taskStatus.checked == false) {
+                    if(currentDate.length > 0) {
+                        taskToEdit.textContent = '';
+                        const datePicker = document.createElement('input');
+                        datePicker.type = 'date';
+                        datePicker.value = currentDate.split('/').reverse().join('-');
+                        
+                        datePicker.addEventListener('blur', () => {
+                            datePicker.style.display = 'none';
+                            if(datePicker.value.length > 0) {
+                                taskToEdit.textContent = datePicker.value.split('-').reverse().join('/');
+                                tasks.find((obj, index) => {
+                                    if(index == idOfTask) {
+                                        tasks[idOfTask].dueDate = ui.formatDate(datePicker.value);
+                                        storage.updateTasks(tasks, project);
+                                    }
+                                });
+                            }
+                            else {
+                                taskToEdit.textContent = ui.formatDate(currentDate);
+                            }
+                        });
+                        
+                        secondInfo.insertBefore(datePicker, secondInfo.firstChild);
+                        datePicker.focus();
+                    }
                 }
             }); 
         });
@@ -247,6 +244,7 @@ const Tasks = (project, storage) => {
 
         tasksElements.forEach((task) => {
             const inputDate = task.querySelector('.input_date');
+            
             inputDate.addEventListener('input', () => {
                 const idOfTask = task.dataset.id;
                 tasks.find((obj, index) => {

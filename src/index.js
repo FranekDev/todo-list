@@ -8,5 +8,3 @@ Header();
 Sidebar();
 TODO();
 MobileMenu();
-// Footer();
-// Tasks();
