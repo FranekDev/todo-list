@@ -40,16 +40,22 @@
                         font-size: 0.95em;
                         width: 330px;
                         height: auto;
-                        max-height: 70px;
+                        height: 50px;
 
                         .task_title {
-                            width: 130px;
+                            width: auto;
                             word-wrap: break-word;
                             margin: 10px;
                         }
                         .trash_icon {
                             width: 19px;
                             height: auto;
+                        }
+
+                        .info {
+                            input {
+                                max-width: 120px;
+                            }
                         }
                     }
                 }

@@ -11,7 +11,9 @@
     font-size: $font-size;
 
     .task_title {
-        width: 250px;
+        // width: 250px;
+        width: auto;
+        max-width: 250px;
         word-wrap: break-word;
         margin: 10px;
     }
@@ -19,6 +21,21 @@
     .info {
         @include flex(row, space-between, center);
         gap: 10px;
+
+        input {
+            background-color: $main-color;
+            border: none;
+            border-bottom: 2px solid $secondary-color;
+            color: $font-color;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .input_date {
+            border: none;
+        }
     }
     @media (max-width: $layout-breakpoint-small) {
         width: 500px;

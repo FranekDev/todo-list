@@ -52,8 +52,10 @@ const TODO = () => {
         });
     }
     changeDateFormatView();
+
     const changeProjectView = () => {
         allProjects = document.querySelectorAll('.project_name_container');
+
         firstProject = storage.getProjects();
         let activeProject = '';
         
@@ -71,14 +73,17 @@ const TODO = () => {
 
             let remove = project.querySelector('.x_icon');
             remove.addEventListener('click', () => {
+
                 let projects = storage.getProjects().sort((p1, p2) => { 
                     return new Date(p1.addDate) - new Date(p2.addDate);
-                });;
+                });
+
                 if(activeProject.name != projects[index]) {
-                ui.resetProject(remove);
-                storage.removeProject(projects[index]);
+                    storage.removeProject(projects[index]);
+                    ui.resetAllProjects();
                 }
                 showProjects();
+                changeProjectView();
             });
         });
     };
@@ -104,7 +109,6 @@ const TODO = () => {
             (index === 0) ? projectLink.classList.add('active_project') : '';
 
             projectLink.textContent = project.name;
-            // projectLink.textContent += ui.showX();
             projectNameContainer.appendChild(projectLink);
             ui.showX(projectNameContainer);
             
@@ -165,6 +169,6 @@ const TODO = () => {
     changeProjectView();
     projectHighlight();
 
-}
+};
 
 export default TODO;
