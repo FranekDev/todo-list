@@ -3,7 +3,7 @@ import UI from './UI';
 
 const Tasks = (project, storage) => {
     const ui = new UI();
-    // console.log(project.tasks);
+    
     const content = document.querySelector('.task_content');
     
     const main = document.createElement('div');
@@ -11,10 +11,12 @@ const Tasks = (project, storage) => {
     content.appendChild(main);
     
     let tasks = storage.getTasks(project);
-    // console.log(tasks);
+    
     if(project.name == 'Today') {
         tasks = storage.getTodayTasks();
-        // console.log('js', tasks);
+    }
+    else if(project.name == 'This week') {
+        tasks = storage.getThisWeekTasks();
     }
 
     let tasksContent = document.createElement('div');
@@ -143,10 +145,18 @@ const Tasks = (project, storage) => {
                         title.style.display = 'none';
                         if(title.value.trim().length > 0) {
                             taskToEdit.textContent += e.target.value.trim();
+
                             tasks.find((obj, index) => {
+
                                 if(index == idOfTask) {
                                     tasks[idOfTask].title = title.value.trim();
-                                    storage.updateTasks(tasks, project);
+                                    console.log(tasks[idOfTask], tasks[idOfTask].taskID);
+                                    if(project.name == 'Today' || project.name == 'This week') {
+                                        storage.updateTodayTask(tasks[idOfTask], tasks[idOfTask].taskID);
+                                    }
+                                    else {
+                                        storage.updateTasks(tasks, project);
+                                    }
                                 }
                             });
                         }
@@ -180,18 +190,29 @@ const Tasks = (project, storage) => {
                 if(taskStatus.checked == false) {
                     if(currentDate.length > 0) {
                         taskToEdit.textContent = '';
+
                         const datePicker = document.createElement('input');
                         datePicker.type = 'date';
                         datePicker.value = currentDate.split('/').reverse().join('-');
                         
                         datePicker.addEventListener('blur', () => {
                             datePicker.style.display = 'none';
+
                             if(datePicker.value.length > 0) {
                                 taskToEdit.textContent = datePicker.value.split('-').reverse().join('/');
+
                                 tasks.find((obj, index) => {
+
                                     if(index == idOfTask) {
+
                                         tasks[idOfTask].dueDate = ui.formatDate(datePicker.value);
-                                        storage.updateTasks(tasks, project);
+                                        if(project.name == 'Today' || project.name == 'This week') {
+                                            storage.updateTodayTask(tasks[idOfTask], tasks[idOfTask].taskID);
+                                        }
+                                        else {
+                                            storage.updateTasks(tasks, project);
+                                        }
+                                        showTasks();
                                     }
                                 });
                             }
@@ -217,10 +238,17 @@ const Tasks = (project, storage) => {
 
             taskToDelete.addEventListener('click', () => {
                 const idOfTask = task.dataset.id;
+
                 tasks.find((obj, index) => {
+
                     if(index == idOfTask) {
-                        tasks.splice(index, 1);
-                        storage.updateTasks(tasks, project);
+                        if(project.name == 'Today' || project.name == 'This week') {
+                            storage.updateTodayTask(tasks[idOfTask], tasks[idOfTask].taskID, 'delete');
+                        }
+                        else {
+                            tasks.splice(index, 1);
+                            storage.updateTasks(tasks, project);
+                        }
                     }
                 })
                 
@@ -235,14 +263,17 @@ const Tasks = (project, storage) => {
         inputDate.forEach(input => { input.style.display = 'none';});
         tasksContent = document.querySelector('.tasks_list');
         tasksContent.textContent = '';
+
         if(project.name == 'Today' && project.tasks.length == 0) {
             tasks = storage.getTodayTasks();
         }
+        else if(project.name == 'This week' && project.tasks.length == 0) {
+            tasks = storage.getThisWeekTasks();
+        } 
         else {
             tasks = storage.getTasks(project);
         }
-        // console.log(tasks.length);
-        // console.log(tasks);
+        
         tasks.forEach((task, index) => {
             ui.showTask(tasksContent, index, task.status, task.title, task.dueDate);
         });

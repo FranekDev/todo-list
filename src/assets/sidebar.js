@@ -15,30 +15,10 @@ const Sidebar = () => {
     
     const nav = document.createElement('nav');
     nav.classList.add('todo_nav');
-    
-
-    // const dateLinks = document.createElement('ul');
-    // dateLinks.classList.add('date_links');
-    // let dateFormats = ['Today', 'This week'];
-
-    // dateFormats.forEach(dateFormat => {
-    //     const element = document.createElement('li');
-    //     const link = document.createElement('a');
-    //     link.classList.add('date_link', 'project_name');
-    //     link.textContent = dateFormat;
-    //     element.appendChild(link);
-    //     dateLinks.appendChild(link);
-    // });
 
     const projects = document.createElement('div');
     projects.classList.add('projects');
 
-    // const projectsDescription = document.createElement('span');
-    // projectsDescription.textContent = 'Projects';
-
-    // projects.appendChild(projectsDescription);
-
-    // nav.appendChild(dateLinks);
     nav.appendChild(projects);
     
     sidebarBackground.appendChild(nav);
@@ -47,6 +27,5 @@ const Sidebar = () => {
     sidebar.appendChild(sidebarBackground);
 
 }
-
 
 export default Sidebar;

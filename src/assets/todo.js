@@ -5,7 +5,6 @@ import LocalStorage from './localStorage';
 
 const TODO = () => {
 
-
     const ui = new UI();
     const storage = new LocalStorage();
 
@@ -49,26 +48,6 @@ const TODO = () => {
     
     const mainTasks = document.querySelector('.task_content');
 
-    // const changeDateFormatView = () => {
-    //     const dateLinks = document.querySelectorAll('.date_link');
-    //     const projectsField = document.querySelector('.projects_list');
-    //     const newProjectBtn = document.querySelector('.new_projects');
-
-        
-    //     dateLinks.forEach(dateLink => {
-    //         dateLink.addEventListener('click', () => {
-    //             console.log(dateLink);
-    //             // console.log(dateLink.textContent);
-    //             ui.resetAllProjects();
-    //             ui.resetDateFormats();
-    //             ui.setActiveDateFormat(dateLink);
-    //             mainTasks.textContent = '';
-    //             TODO(storage.getProjectName(dateLink.textContent), storage);
-    //         });
-    //     });
-    // }
-    // changeDateFormatView();
-
     const changeProjectView = () => {
         allProjects = document.querySelectorAll('.project_name_container');
 
@@ -105,8 +84,6 @@ const TODO = () => {
             });
         });
     };
-    // changeProjectView();
-
     
     const showProjects = () => {
         let localProjects = storage.getProjects();
@@ -117,11 +94,7 @@ const TODO = () => {
 
         projectsList.textContent = '';
 
-        // const userProjects = document.createElement('div');
-        // userProjects.classList.add('user_projects');
-
         localProjects.forEach((project, index) => {
-            // if(project.name != 'Today' && project.name != 'This week') {
             const projectNameContainer = document.createElement('div');
             projectNameContainer.classList.add('project_name_container');
 
@@ -132,15 +105,11 @@ const TODO = () => {
 
             projectLink.textContent = project.name;
             projectNameContainer.appendChild(projectLink);
-            // if(projectLink.textContent != 'Today' && projectLink.textContent != 'This week') {
+            
             ui.showX(projectNameContainer);
-            // }
             
             projectsList.appendChild(projectNameContainer);
-            // userProjects.appendChild(projectNameContainer);
-            // }
         });
-        // projectsList.appendChild(userProjects);
         const projectsDescription = document.createElement('span');
         projectsDescription.textContent = 'Projects';
         const secondChild = projectsList.children[1];
@@ -162,8 +131,6 @@ const TODO = () => {
             });
         });
     }
-
-
  
     newProject.addEventListener('click', () => {
 
