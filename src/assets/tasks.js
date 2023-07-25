@@ -3,23 +3,30 @@ import UI from './UI';
 
 const Tasks = (project, storage) => {
     const ui = new UI();
-
+    // console.log(project.tasks);
     const content = document.querySelector('.task_content');
     
     const main = document.createElement('div');
     main.classList.add('main_tasks');
     content.appendChild(main);
-
+    
     let tasks = storage.getTasks(project);
+    // console.log(tasks);
+    if(project.name == 'Today') {
+        tasks = storage.getTodayTasks();
+        // console.log('js', tasks);
+    }
 
-    const tasksContent = document.createElement('div');
+    let tasksContent = document.createElement('div');
     tasksContent.classList.add('tasks_list');
     main.appendChild(tasksContent);
 
     const addTaskBtn = document.createElement('a');
     addTaskBtn.classList.add('add_task');
     addTaskBtn.textContent = '+ add task';
-    main.appendChild(addTaskBtn);
+    if(project.name != 'Today' && project.name != 'This week') {
+        main.appendChild(addTaskBtn);
+    }
 
     const newTaskForm = document.createElement('div');
     newTaskForm.classList.add('new_task_form');
@@ -57,7 +64,7 @@ const Tasks = (project, storage) => {
         addBtn.addEventListener('click', () => {
 
             if(name.value.trim().length > 0) {
-                let newTask = new Task(name.value, date.value);
+                let newTask = new Task(name.value.trim(), date.value);
                 storage.addTask(newTask, project);
             }
 
@@ -100,7 +107,12 @@ const Tasks = (project, storage) => {
                 if(singleTask) {
                     tasks[idOfTask].status = (tasks[idOfTask].status == false) ? true : false;
                 }
-                storage.updateTasks(tasks, project);
+                if(project.name == 'Today' || project.name == 'This week') {
+                    storage.updateTodayTask(tasks[idOfTask], tasks[idOfTask].taskID);
+                }
+                else {
+                    storage.updateTasks(tasks, project);
+                }
                 
                 renderTasks();
 
@@ -129,11 +141,11 @@ const Tasks = (project, storage) => {
                         
                     title.addEventListener('blur', (e) => {
                         title.style.display = 'none';
-                        if(title.value.length > 0) {
-                            taskToEdit.textContent += e.target.value;
+                        if(title.value.trim().length > 0) {
+                            taskToEdit.textContent += e.target.value.trim();
                             tasks.find((obj, index) => {
                                 if(index == idOfTask) {
-                                    tasks[idOfTask].title = title.value;
+                                    tasks[idOfTask].title = title.value.trim();
                                     storage.updateTasks(tasks, project);
                                 }
                             });
@@ -221,8 +233,16 @@ const Tasks = (project, storage) => {
     const showTasks = () => {
         const inputDate = document.querySelectorAll('.input_date');
         inputDate.forEach(input => { input.style.display = 'none';});
+        tasksContent = document.querySelector('.tasks_list');
         tasksContent.textContent = '';
-        tasks = storage.getTasks(project);
+        if(project.name == 'Today' && project.tasks.length == 0) {
+            tasks = storage.getTodayTasks();
+        }
+        else {
+            tasks = storage.getTasks(project);
+        }
+        // console.log(tasks.length);
+        // console.log(tasks);
         tasks.forEach((task, index) => {
             ui.showTask(tasksContent, index, task.status, task.title, task.dueDate);
         });

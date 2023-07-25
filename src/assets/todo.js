@@ -10,10 +10,18 @@ const TODO = () => {
     const storage = new LocalStorage();
 
     let projectToSave = new Project('Main project');
+    let todayProject = new Project('Today');
+    let thisWeekProjects = new Project('This week');
 
-    if(storage.checkIfProjectExists(projectToSave) == null) {
+    if(storage.checkIfProjectExists(projectToSave) == null ||
+    storage.checkIfProjectExists(todayProject) == null ||
+    storage.checkIfProjectExists(thisWeekProjects) == null) {
         projectToSave.addDate = new Date(0);
+        todayProject.addDate = new Date(-2);
+        thisWeekProjects.addDate = new Date(-1);
         storage.saveProject(projectToSave);
+        storage.saveProject(todayProject);
+        storage.saveProject(thisWeekProjects);
     }
 
     let firstProject = storage.getProjects().sort((p1, p2) => { 
@@ -34,31 +42,32 @@ const TODO = () => {
     const newProject = document.createElement('button');
     newProject.textContent = 'new';
 
-    const projectsList = document.createElement('div');
+    let projectsList = document.createElement('div');
     projectsList.classList.add('projects_list');
     
     let allProjects = document.querySelectorAll('.project_name_container');
     
     const mainTasks = document.querySelector('.task_content');
 
-    const changeDateFormatView = () => {
-        const dateLinks = document.querySelectorAll('.date_link');
-        // projectsList = document.querySelector('.projects_list');
-        // const userProjects = document.querySelector('.user_projects');
+    // const changeDateFormatView = () => {
+    //     const dateLinks = document.querySelectorAll('.date_link');
+    //     const projectsField = document.querySelector('.projects_list');
+    //     const newProjectBtn = document.querySelector('.new_projects');
+
         
-        dateLinks.forEach(dateLink => {
-            dateLink.addEventListener('click', () => {
-                console.log(dateLink.textContent);
-                ui.resetAllProjects();
-                ui.resetDateFormats();
-                ui.setActiveDateFormat(dateLink);
-                mainTasks.textContent = '';
-                // userProjects.textContent = '';
-                // TODO(dateLink.textContent, storage);
-            });
-        });
-    }
-    changeDateFormatView();
+    //     dateLinks.forEach(dateLink => {
+    //         dateLink.addEventListener('click', () => {
+    //             console.log(dateLink);
+    //             // console.log(dateLink.textContent);
+    //             ui.resetAllProjects();
+    //             ui.resetDateFormats();
+    //             ui.setActiveDateFormat(dateLink);
+    //             mainTasks.textContent = '';
+    //             TODO(storage.getProjectName(dateLink.textContent), storage);
+    //         });
+    //     });
+    // }
+    // changeDateFormatView();
 
     const changeProjectView = () => {
         allProjects = document.querySelectorAll('.project_name_container');
@@ -112,6 +121,7 @@ const TODO = () => {
         // userProjects.classList.add('user_projects');
 
         localProjects.forEach((project, index) => {
+            // if(project.name != 'Today' && project.name != 'This week') {
             const projectNameContainer = document.createElement('div');
             projectNameContainer.classList.add('project_name_container');
 
@@ -122,12 +132,20 @@ const TODO = () => {
 
             projectLink.textContent = project.name;
             projectNameContainer.appendChild(projectLink);
+            // if(projectLink.textContent != 'Today' && projectLink.textContent != 'This week') {
             ui.showX(projectNameContainer);
+            // }
             
             projectsList.appendChild(projectNameContainer);
             // userProjects.appendChild(projectNameContainer);
+            // }
         });
         // projectsList.appendChild(userProjects);
+        const projectsDescription = document.createElement('span');
+        projectsDescription.textContent = 'Projects';
+        const secondChild = projectsList.children[1];
+
+        projectsList.insertBefore(projectsDescription, secondChild.nextSibling);
 
         allProjects = document.querySelectorAll('.project_name_container');
     };

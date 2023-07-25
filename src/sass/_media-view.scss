@@ -37,9 +37,15 @@
 
                     .task {
                         font-size: 0.95em;
-                        width: 330px;
+                        width: 320px;
                         height: auto;
-                        height: 50px;
+                        min-height: 50px;
+                        margin: 2px 5px;
+
+                        input[type="checkbox"] {
+                            min-width: 17px;
+                            min-height: 17px;
+                        }
 
                         .task_title {
                             width: auto;

@@ -10,12 +10,17 @@
     background-color: $secondary-color;
 }
 
+// html {
+//     height: 100%;
+//     width: 100%;
+// }
+
 body {
     background-color: $main-color;
     font-family: $font-family;
     width: 100vw;
     height: 100vh;
-    position: relative;
+    // position: relative;
     @include flex(row-reverse, space-between, center);
 
     .main_content {
