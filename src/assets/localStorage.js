@@ -12,9 +12,6 @@ export default class LocalStorage {
         if(this.checkIfProjectExists(projectToSave) == null) {
             localStorage.setItem(projectToSave.name, JSON.stringify(projectToSave));
         }
-        else {
-            alert('projekt ' + projectToSave.name + ' juz istanieje');
-        }
     }
 
     getProject(project) {
@@ -103,7 +100,6 @@ export default class LocalStorage {
 
     updateTodayTask(task, id, operation = '') {
         const projectToUpdate = JSON.parse(localStorage.getItem(task.project)) || {};
-        console.log(projectToUpdate.tasks, id);
 
         if(operation == 'delete') {
             projectToUpdate.tasks.splice(id, 1);
@@ -144,7 +140,7 @@ export default class LocalStorage {
                 taskDate <= lastDayOfWeek
             );
         };
-        
+
         for(const project of projects) {
             let i = 0;
             for(const task of this.getTasks(project)) {

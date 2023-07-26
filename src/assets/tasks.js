@@ -150,7 +150,6 @@ const Tasks = (project, storage) => {
 
                                 if(index == idOfTask) {
                                     tasks[idOfTask].title = title.value.trim();
-                                    console.log(tasks[idOfTask], tasks[idOfTask].taskID);
                                     if(project.name == 'Today' || project.name == 'This week') {
                                         storage.updateTodayTask(tasks[idOfTask], tasks[idOfTask].taskID);
                                     }
@@ -274,9 +273,17 @@ const Tasks = (project, storage) => {
             tasks = storage.getTasks(project);
         }
         
-        tasks.forEach((task, index) => {
-            ui.showTask(tasksContent, index, task.status, task.title, task.dueDate);
-        });
+        if(tasks.length == 0) {
+            const noTasksMessage = document.createElement('p');
+            noTasksMessage.textContent = 'No tasks';
+            tasksContent.appendChild(noTasksMessage);
+        }
+        else {
+            tasks.forEach((task, index) => {
+                ui.showTask(tasksContent, index, task.status, task.title, task.dueDate);
+            });
+        }
+        
         changeTaskStatus();
         editTaskTitle();
         editTaskDueDate();
