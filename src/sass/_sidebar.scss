@@ -2,15 +2,9 @@
 
 .sidebar {
     width: 200px;
-    height: 100vh;
-    // padding: 5px;
-    // animation: show_sidebar;
-    // animation-duration: 1s;
+    height: 100%;
+    padding: 5px;
     @include animateOpacity();
-    // position: sticky;
-    // top: 0;
-    // margin-top: -150px;
-    // position: fixed;
 
 
     .sidebar_bg {
@@ -18,12 +12,9 @@
         color: $font-color;
         @include flex(column, space-between, center);
         overflow: hidden;
-        width: 200px;
-        height: 99%;
+        width: 100%;
+        height: 100%;
         background-color: $secondary-color;
-        position: fixed;
-        margin: 5px;
-    
     
         .todo_nav {
             @include flex(column, center, flex-start);
@@ -56,7 +47,6 @@
         }
 
         .bg_text {
-            // color: #3904AB;
             color: $darker-secondary;
             font-family: $secondary-font;
             transform: rotate(-90deg);

@@ -10,10 +10,6 @@
     background-color: $secondary-color;
 }
 
-// html {
-//     height: 100%;
-//     width: 100%;
-// }
 
 body {
     background-color: $main-color;
@@ -21,7 +17,6 @@ body {
     width: 100vw;
     height: 100vh;
     height: 100svh;
-    // position: relative;
     @include flex(row-reverse, space-between, center);
 
     .main_content {
@@ -78,7 +73,6 @@ body {
             border: none;
             border-bottom: 2px solid $third-color;
             padding: 6px;
-            // border-radius: 8px;
             color: $font-color;
             font-weight: bold;
             width: $input-width;
@@ -92,8 +86,7 @@ body {
             width: 80px;
             padding: 5px 10px;
             height: auto;
-            // background-color: $third-color;
-            color: $font-color;
+            color: $main-color;
             font-weight: 900;
             border: none;
             background-color: $secondary-color;
